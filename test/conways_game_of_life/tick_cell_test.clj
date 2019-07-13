@@ -17,3 +17,6 @@
     (is (= 2 (count (sut/living-neighbours t (-> world
                                               (assoc-in [0 1] a)
                                               (assoc-in [0 0] a))))))))
+
+(deftest tick-cell
+  (is (= s/alive (:state (sut/tick-cell d [1 2 3])))))

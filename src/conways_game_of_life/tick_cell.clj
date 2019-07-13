@@ -27,19 +27,17 @@
        (filter #(and (not (nil? %)) (= status/alive (:state %))))))
 
 (defmulti tick-cell
-  (fn [cell world] (:state cell)))
+  (fn [cell living-neighbours] (:state cell)))
 
-(defmethod tick-cell status/dead [cell world]
-  (let [neighbours (living-neighbours cell world)
-        num-neighbours (count neighbours)]
+(defmethod tick-cell status/dead [cell living-neighbours]
+  (let [num-living-neighbours (count living-neighbours)]
     (cond
-      (= 3 num-neighbours) (assoc cell :state status/alive)
+      (= 3 num-living-neighbours) (assoc cell :state status/alive)
       :default cell)))
 
-(defmethod tick-cell status/alive [{:keys [x y] :as cell} world]
-  (let [neighbours (living-neighbours cell world)
-        num-neighbours (count neighbours)]
+(defmethod tick-cell status/alive [{:keys [x y] :as cell} living-neighbours]
+  (let [num-living-neighbours (count living-neighbours)]
     (cond
-      (< num-neighbours 2) (assoc cell :state status/dead)
-      (<= num-neighbours 3) cell
-      (< 3 num-neighbours) (assoc cell :state status/dead))))
+      (< num-living-neighbours 2) (assoc cell :state status/dead)
+      (<= num-living-neighbours 3) cell
+      (< 3 num-living-neighbours) (assoc cell :state status/dead))))
