@@ -19,4 +19,11 @@
                                               (assoc-in [0 0] a))))))))
 
 (deftest tick-cell
-  (is (= s/alive (:state (sut/tick-cell d [1 2 3])))))
+  ;;regeneration
+  (is (= s/alive (:state (sut/tick-cell d [1 2 3]))))
+  ;;death
+  (is (= s/dead (:state (sut/tick-cell a [1]))))
+  (is (= s/dead (:state (sut/tick-cell a [1 2 3 4]))))
+  ;;survive
+  (is (= s/alive (:state (sut/tick-cell a [1 2 3]))))
+  (is (= s/alive (:state (sut/tick-cell a [1 2])))))
