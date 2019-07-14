@@ -16,6 +16,20 @@
 
 
 
+(let [world [[(make-cell 0 0 s/dead) (make-cell 1 0 s/dead) (make-cell 2 0 s/dead)]
+             [(make-cell 0 1 s/alive) (make-cell 1 1 s/alive) (make-cell 2 1 s/alive)]
+             [(make-cell 0 2 s/dead) (make-cell 1 2 s/dead) (make-cell 2 2 s/dead)]]]
+  ;;(conways-game-of-life.print-world/print-world (sut/tick-world world))
+  ;;(prn "=====================================")
+  (conways-game-of-life.print-world/print-world (-> world
+                                                    (sut/tick-world)
+                                                    (sut/tick-world)
+                                                    (sut/tick-world)))
+  ;;(prn "=====================================")
+  )
+
+
+
 
 
 
