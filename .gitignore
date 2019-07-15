@@ -10,4 +10,4 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
-/src/ui/node_modules
+src/ui/node_modules/
